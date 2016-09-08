@@ -16,6 +16,7 @@ node_modules
 typings
 
 # Compiled stuff
+dist
 *.js
 *.js.map
 *.d.ts
