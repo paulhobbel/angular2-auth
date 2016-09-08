@@ -18,15 +18,6 @@ export class AuthConfig {
     public noJwtError: boolean;
     public noTokenScheme: boolean;
 
-    /**
-     * {
-        globalHeaders: Array<Object>,
-        headerName: string,
-        headerPrefix: string,
-        noJwtError: boolean,
-        noTokenScheme?: boolean
-    }
-     */
     constructor(config?: IAuthConfig) {
         this.globalHeaders = config.globalHeaders || [];
         this.headerName = config.headerName || 'Authorization';

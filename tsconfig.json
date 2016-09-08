@@ -1,18 +1,21 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "module": "commonjs",
+        "module": "amd",
         "moduleResolution": "node",
-        "sourceMap": true,
+        "sourceMap": false,
         "declaration": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "noImplicitAny": true
+        "noImplicitAny": true,
+        "outDir": "./dist"
     },
     "files": [
-        "index.ts"
+        "src/index.ts",
+        "typings/index.d.ts"
     ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "dist"
     ]
 }
