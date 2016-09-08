@@ -22,7 +22,7 @@
     "helper"
   ],
   "author": "Dizzy <itsdizzy40@gmail.com>",
-  "license": "GPL-3.0",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ItsDizzy/angular2-auth/issues"
   },

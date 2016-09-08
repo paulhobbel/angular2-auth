@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright (C) 2016 Dizzy <itsdizzy40@gmail.com>
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file.
+ */
+
 export { AuthModule } from './auth.module';
 export { IAuthConfig, AuthConfig } from './auth.config';
 export { AuthHttp } from './auth.http';

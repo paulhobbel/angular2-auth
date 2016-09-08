@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright (C) 2016 Dizzy <itsdizzy40@gmail.com>
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file.
+ */
+
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule, Http, RequestOptions } from '@angular/http';

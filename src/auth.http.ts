@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright (C) 2016 Dizzy <itsdizzy40@gmail.com>
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file.
+ */
+
 import { Injectable } from '@angular/core';
 import { Http, RequestOptionsArgs, RequestOptions, Request, RequestMethod, Headers, Response } from '@angular/http';
 
