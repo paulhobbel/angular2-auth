@@ -10,16 +10,22 @@ import { Injectable } from '@angular/core';
 
 import { Token } from './token.model';
 
+import { Observable } from 'rxjs';
+
 @Injectable()
 export class TokenService {
 
     private token: Token;
+    private tokenStream: Observable<Token>;
 
     constructor() {
         let storageToken = localStorage.getItem('auth_token');
         if(storageToken) {
             this.token = new Token(storageToken);
         }
+        this.tokenStream = new Observable<Token>((obs: any) => {
+            obs.next(this.getToken());
+        });
     }
 
     /**
@@ -27,6 +33,13 @@ export class TokenService {
      */
     getToken() {
         return this.token;
+    }
+
+    /**
+     * Returns an stream of tokens.
+     */
+    getTokenStream(): Observable<Token> {
+        return this.tokenStream;
     }
 
     /**
