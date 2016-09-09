@@ -26,7 +26,7 @@ export class AuthConfig {
     public noJwtError: boolean;
     public noTokenScheme: boolean;
 
-    constructor(config?: IAuthConfig) {
+    constructor(config: any = {}) {
         this.globalHeaders = config.globalHeaders || [];
         this.headerName = config.headerName || 'Authorization';
         if (config.headerPrefix) {

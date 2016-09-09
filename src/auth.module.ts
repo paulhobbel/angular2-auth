@@ -18,10 +18,6 @@ import { AuthHttp } from './auth.http';
     imports: [
         CommonModule,
         HttpModule
-    ],
-    exports: [
-        TokenService,
-        AuthHttp
     ]
 })
 export class AuthModule {
@@ -34,7 +30,12 @@ export class AuthModule {
                     provide: AuthHttp,
                     useFactory: (tokenService: TokenService, http: Http, options: RequestOptions) => {
                         return new AuthHttp(new AuthConfig(config), tokenService, http, options);
-                    }
+                    },
+                    deps: [
+                        TokenService,
+                        Http,
+                        RequestOptions
+                    ]
                 }
             ]
         }
