@@ -10,52 +10,45 @@ import { Injectable } from '@angular/core';
 
 import { Token } from './token.model';
 
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class TokenService {
 
-    private token: Token;
-    private tokenStream: Observable<Token>;
+    private _token: BehaviorSubject<Token>;
 
     constructor() {
-        let storageToken = localStorage.getItem('auth_token');
-        if(storageToken) {
-            this.token = new Token(storageToken);
-        }
-        this.tokenStream = new Observable<Token>((obs: any) => {
-            obs.next(this.getToken());
-        });
+        this._token = <BehaviorSubject<Token>>new BehaviorSubject(new Token(localStorage.getItem('auth_token')));
     }
 
     /**
      * Get the current token.
      */
-    getToken() {
-        return this.token;
+    getToken(): Token {
+        return this._token.getValue();
     }
 
     /**
      * Returns an stream of tokens.
      */
     getTokenStream(): Observable<Token> {
-        return this.tokenStream;
+        return this._token.asObservable();
     }
 
     /**
      * Update the current token.
      */
     setToken(token: string) {
+        this._token.next(new Token(token));
         localStorage.setItem('auth_token', token);
-        this.token = new Token(token);
     }
 
     /**
      * Remove the current token.
      */
     removeToken() {
+        this._token.next(null);
         localStorage.removeItem('auth_token');
-        this.token = null;
     }
 
 
