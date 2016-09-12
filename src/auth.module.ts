@@ -9,15 +9,22 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule, Http, RequestOptions } from '@angular/http';
+import { RouterModule, Router } from '@angular/router';
 
 import { IAuthConfig, AuthConfig } from './auth.config';
+import { LoggedInAuthGuard, LoggedOutAuthGuard } from './auth.guards';
 import { TokenService } from './token.service';
 import { AuthHttp } from './auth.http';
 
 @NgModule({
     imports: [
         CommonModule,
-        HttpModule
+        HttpModule,
+        RouterModule
+    ],
+    providers: [
+        LoggedInAuthGuard,
+        LoggedOutAuthGuard
     ]
 })
 export class AuthModule {
@@ -35,6 +42,26 @@ export class AuthModule {
                         TokenService,
                         Http,
                         RequestOptions
+                    ]
+                },
+                {
+                    provide: LoggedInAuthGuard,
+                    useFactory: (tokenService: TokenService, router: Router) => {
+                        return new LoggedInAuthGuard(new AuthConfig(config), tokenService, router);
+                    },
+                    deps: [
+                        TokenService,
+                        Router
+                    ]
+                },
+                {
+                    provide: LoggedOutAuthGuard,
+                    useFactory: (tokenService: TokenService, router: Router) => {
+                        return new LoggedOutAuthGuard(new AuthConfig(config), tokenService, router);
+                    },
+                    deps: [
+                        TokenService,
+                        Router
                     ]
                 }
             ]

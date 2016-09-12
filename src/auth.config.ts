@@ -7,11 +7,19 @@
  */
 
 export interface IAuthConfig {
-    globalHeaders: Array<Object>;
-    headerName: string;
-    headerPrefix: string;
-    noJwtError: boolean;
+    globalHeaders?: Array<Object>;
+    headerName?: string;
+    headerPrefix?: string;
+    noJwtError?: boolean;
     noTokenScheme?: boolean;
+    guards?: {
+        loggedInGuard: {
+            redirectUrl: string;
+        },
+        loggedOutGuard: {
+            redirectUrl: string;
+        },
+    }
 }
 
 /**
@@ -25,6 +33,14 @@ export class AuthConfig {
     public headerPrefix: string;
     public noJwtError: boolean;
     public noTokenScheme: boolean;
+    public guards: {
+        loggedInGuard: {
+            redirectUrl: string;
+        },
+        loggedOutGuard: {
+            redirectUrl: string;
+        },
+    }
 
     constructor(config: any = {}) {
         this.globalHeaders = config.globalHeaders || [];
@@ -38,6 +54,10 @@ export class AuthConfig {
         }
         this.noJwtError = config.noJwtError || false;
         this.noTokenScheme = config.noTokenScheme || false;
+        this.guards = {
+            loggedInGuard: config.guards.loggedInGuard || { redirectUrl: null },
+            loggedOutGuard: config.guards.loggedOutGuard || { redirectUrl: null }
+        };
     }
 
     public getConfig(): IAuthConfig {
@@ -46,7 +66,8 @@ export class AuthConfig {
             headerName: this.headerName,
             headerPrefix: this.headerPrefix,
             noJwtError: this.noJwtError,
-            noTokenScheme: this.noTokenScheme
+            noTokenScheme: this.noTokenScheme,
+            guards: this.guards
         };
     }
 

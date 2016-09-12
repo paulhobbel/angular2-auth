@@ -25,11 +25,7 @@ export class TokenService {
      * Get the current token.
      */
     getToken(): Token {
-        let token = this._token.getValue();
-        if(token.token) {
-            return token;
-        }
-        return null;
+        return this._token.getValue();
     }
 
     /**
