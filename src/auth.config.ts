@@ -55,8 +55,8 @@ export class AuthConfig {
         this.noJwtError = config.noJwtError || false;
         this.noTokenScheme = config.noTokenScheme || false;
         this.guards = {
-            loggedInGuard: config.guards.loggedInGuard || { redirectUrl: null },
-            loggedOutGuard: config.guards.loggedOutGuard || { redirectUrl: null }
+            loggedInGuard: (config.guards && config.guards.loggedInGuard) || { redirectUrl: null },
+            loggedOutGuard: (config.guards && config.guards.loggedOutGuard) || { redirectUrl: null }
         };
     }
 
