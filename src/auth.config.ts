@@ -46,7 +46,7 @@ export class AuthConfig {
         this.globalHeaders = config.globalHeaders || [];
         this.headerName = config.headerName || 'Authorization';
         if (config.headerPrefix) {
-            this.headerPrefix = config.headerPrefix + ' ';
+            this.headerPrefix = config.headerPrefix;
         } else if (config.noTokenScheme) {
             this.headerPrefix = '';
         } else {
