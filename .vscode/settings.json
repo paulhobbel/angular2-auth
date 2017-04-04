@@ -6,6 +6,9 @@
         "**/.hg": true,
         "**/.DS_Store": true,
         "**/*.js.map": true,
-        "**/*.js": {"when": "$(basename).ts"}
-    }
+        "**/*.js": { "when": "$(basename).ts" }
+    },
+    "eslint.enable": false,
+    "jshint.enable": false,
+    "tslint.enable": false
 }
