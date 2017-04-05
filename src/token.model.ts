@@ -38,7 +38,7 @@ export class Token {
         return decodeURIComponent(escape(typeof window === 'undefined' ? atob(output) : window.atob(output)));
     }
 
-    private decodeToken(): any {
+    public decodeToken(): any {
         let parts = this.token.split('.');
 
         if(parts.length !==3) {
