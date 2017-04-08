@@ -10,7 +10,7 @@
 declare function escape(s:string): string;
 
 export class TokenError extends Error {
-
+    
     name = "TokenError";
 
     constructor(message: string) {
@@ -59,11 +59,11 @@ export class Token {
     public getExpirationDate(): Date {
         let decoded = this.decodeToken();
 
-        if(!decoded.hasOwnProperty('exp') && !decoded.hasOwnProperty('iat')) {
+        if(!decoded.hasOwnProperty('exp')) {
             return new Date();
         }
-        let issueAt = decoded.iat;
-        let date = new Date(issueAt*1000);
+
+        let date = new Date(0);
         date.setUTCSeconds(decoded.exp);
 
         return date;
