@@ -1,6 +1,6 @@
 {
   "name": "angular2-auth",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Provides an angular auth module to handle authentication based on JWT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
