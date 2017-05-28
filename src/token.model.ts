@@ -21,7 +21,12 @@ export class TokenError extends Error {
 export class Token {
     constructor(
         public token: string
-    ) {}
+    ) {
+        // Set token back to null if it is expired.
+        if(this.isExpired()) {
+            token = null;
+        }
+    }
 
     private decodeBase64(str: string): string {
         let output = str.replace(/-/g, '+')
