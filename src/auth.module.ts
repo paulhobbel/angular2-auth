@@ -12,7 +12,6 @@ import { HttpModule, Http, RequestOptions } from '@angular/http';
 import { RouterModule, Router } from '@angular/router';
 
 import { IAuthConfig, AuthConfig } from './auth.config';
-import { LoggedInAuthGuard, LoggedOutAuthGuard } from './auth.guards';
 import { TokenService } from './token.service';
 import { AuthHttp } from './auth.http';
 
@@ -21,10 +20,6 @@ import { AuthHttp } from './auth.http';
         CommonModule,
         HttpModule,
         RouterModule
-    ],
-    providers: [
-        LoggedInAuthGuard,
-        LoggedOutAuthGuard
     ]
 })
 export class AuthModule {
@@ -35,36 +30,18 @@ export class AuthModule {
                 TokenService,
                 {
                     provide: AuthHttp,
-                    useFactory: (tokenService: TokenService, http: Http, options: RequestOptions) => {
-                        return new AuthHttp(new AuthConfig(config), tokenService, http, options);
-                    },
+                    useFactory: provideAuthHttp,
                     deps: [
                         TokenService,
                         Http,
                         RequestOptions
                     ]
-                },
-                {
-                    provide: LoggedInAuthGuard,
-                    useFactory: (tokenService: TokenService, router: Router) => {
-                        return new LoggedInAuthGuard(new AuthConfig(config), tokenService, router);
-                    },
-                    deps: [
-                        TokenService,
-                        Router
-                    ]
-                },
-                {
-                    provide: LoggedOutAuthGuard,
-                    useFactory: (tokenService: TokenService, router: Router) => {
-                        return new LoggedOutAuthGuard(new AuthConfig(config), tokenService, router);
-                    },
-                    deps: [
-                        TokenService,
-                        Router
-                    ]
                 }
             ]
         }
     }
+}
+
+export function provideAuthHttp(config: IAuthConfig, tokenService: TokenService, http: Http, options: RequestOptions) {
+    return new AuthHttp(new AuthConfig(config), tokenService, http, options);
 }
